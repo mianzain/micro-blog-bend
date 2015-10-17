@@ -1,0 +1,45 @@
+body {
+  color: #333;
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: white;		 /* Sanity Check! */
+/*background-image : url("https://pixabay.com/get/7f8d999734ac5ac6a114/1445117941/background-images-723764_1920.jpg?direct"); */
+}
+
+h1 {
+  margin-top: 100px;
+  text-align: center;
+}
+
+
+#Microblog-box {
+	
+
+   
+}
+
+#Microblog-list {
+
+/*background-color: #ecf0f1;*/
+	margin: 20px;
+	font-family: Arial, Tahoma; 
+	font-size: 20px; 
+	color: #666666; 
+	text-align: center;	
+
+
+}
+.Microblog {
+margin-bottom: 20px;
+background-color: #ecf0f1;
+
+
+
+}
+#post{
+background-color: grey;
+
+}
+
+
+
+
