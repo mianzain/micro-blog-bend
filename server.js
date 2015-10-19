@@ -31,11 +31,24 @@ app.get('/microblog/:id', function(req, res) {
 	res.render('Microblog-show', {Microblog: Microblog});
 
 });
-app.post('/api/post', function(req, res) {
+app.post('/api/posts', function(req, res) {
 	console.log(req.body);
 	db.Post.create(req.body, function(err, microblog) {
 			res.json(microblog);
 	});
+
+	app.delete('/api/posts/:id', function(req, res){
+		console.log('the post id is:', req.params.id);
+	db.Post.remove({_id : req.params.id},function(err,post) {
+		console.log("post delete");
+		res.json(post);
+	});
+
+	});
+
+
+
+
 // res.status(200).json(Microblog);
 });
 
