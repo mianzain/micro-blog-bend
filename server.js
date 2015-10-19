@@ -1,22 +1,49 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-
+var mongoose = require('mongoose');
+var db =require('./models/index.js');
 
 app.set('view engine', 'ejs');
+
+// app.use(bodyparser.json());
+app.use(bodyParser.urlencoded({extended :true}));
 
 
 app.use(express.static('public'));
 
-app.get('/', function (req, res) {
-	res.render('index');
+// mongoose.connect('mongodb://localhost/micro-blog-bend');
+
+
+
+app.get('/', function(req, res) {
+	db.Post.find({}, function(err, posts) {
+		if (err) console.log(err);
+	
+	res.render('index', {
+		posts: posts
+	});
+});
+});
+
+app.get('/microblog/:id', function(req, res) {
+	var microblog = Microblogs [req.params.id];
+	res.render('Microblog-show', {Microblog: Microblog});
+
+});
+app.post('/api/post', function(req, res) {
+	console.log(req.body);
+	db.Post.create(req.body, function(err, microblog) {
+			res.json(microblog);
+	});
+// res.status(200).json(Microblog);
 });
 
 
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+// app.get('/', function (req, res) {
+//   res.send('Hello World!');
+// });
 
 
 

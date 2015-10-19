@@ -1,43 +1,71 @@
 console.log("Sanity Check: JS is working!");
 
-$(document).ready(function(){
+$(document).ready(function() {
 
-  // code in here
-  //Form to creat Micro blog
-var Microblog = [
-	{name: "Zain Ahmed", desc: "Sample Blog WorKing for ProJect 0"},
+		  // code in here
+		  //Form to creat Micro blog
+		// var Microblog = [
+		// 	{name: "Zain Ahmed", desc: "Sample Blog WorKing for ProJect 0"},
 
-	];
-//element to hold our list of blogs
-var $newMicroblog = $('#new-Microblog');
-console.log($newMicroblog);
-var $MicroblogList = $('#Microblog-list');
+		// 	];
+		//element to hold our list of blogs
+		var $newMicroblog = $('#new-Microblog');
+		var $MicroblogList = $('#Microblog-list');
 
-for (var i=0; i < Microblog.length; i++) {
-    $MicroblogList.append('<li class="Microblog">' + Microblog[i].name + ' -- ' + Microblog[i].desc + '</li>');
 
-  }
-	$newMicroblog.on('submit', function(event) {
+
+  
+	$("#new-Microblog").on('submit', function(event) {
 	event.preventDefault();
+	text = $(this).serialize();
+	console.log('text: ', text);
 
-	var MicroblogName = $('#Microblog-name').val();
-	var Microblogdesc = $('#Microblog-desc').val();
-	var MicroblogData = {name: MicroblogName, desc: Microblogdesc};
+	$.ajax({
+		url: '/api/post',
+		type: "post",
+		data: text
+	})
+	.done(function(data){
+      console.log('response from server: ', data);
+      	$MicroblogList.append('<li class="Microblog">' + data.name + ' ---- ' + data.desc + '</li>');
 
-	Microblog.push(MicroblogData);
+      	$newMicroblog[0].reset();
+
+	})
+	.fail(function(data){
+
+
+	});
+	// var MicroblogName = $('#Microblog-name').val();
+	// var Microblogdesc = $('#Microblog-desc').val();
+	// var MicroblogData = {name: MicroblogName, desc: Microblogdesc};
+
+	// Microblog.push(MicroblogData);
+
+	// $MicroblogList.append('<li class="Microblog">' + MicroblogData.name + ' ---- ' + MicroblogData.desc + '</li>');
+	// console.log("the MicroblogData is" + MicroblogData.name);
 	
-	console.log(Microblog);
 
-	$MicroblogList.append('<li class="Microblog">' + MicroblogData.name + ' ---- ' + MicroblogData.desc + '</li>');
 
-	$newMicroblog[0].reset();
-	$('#Microblog-name').focus();
+	// var MicroblogName = $('#Microblog-name').val();
+	// var Microblogdesc = $('#Microblog-desc').val();
+	// var MicroblogData = {name: MicroblogName, desc: Microblogdesc};
 
-});	
+	// Microblog.push(MicroblogData);
+	
 
-	$MicroblogList.on('click' , '.Microblog', function() {
-	$(this).addClass('done');
 
-  });
+	
+
+	// $('#MicroblogList')	.on('click' , '.Microblog', function() {
+
+	// $(this).addClass('done');
+
+	 });
+
+
+ 
 
 });
+
+
